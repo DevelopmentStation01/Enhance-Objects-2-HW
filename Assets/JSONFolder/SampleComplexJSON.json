@@ -1,0 +1,18 @@
+{
+    "name":"Mike",
+    "address":
+    {
+        "unit":10,
+        "road":"Johnson Street",
+        "city":"New York City"
+    },
+    "books":
+    [{
+        "bookName":"New game dev Intro",
+        "bookAuthor":"Arthur Belly",
+        "isDigital":false
+        },
+        {"bookName":"",
+        "bookAuthor":"",
+        "isDigital":false}
+    ]}
