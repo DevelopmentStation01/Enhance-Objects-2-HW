@@ -101,8 +101,8 @@ public class Player : PlayableObject
             else
                 gunPowerScale = Mathf.Lerp(gunPowerScale, 0f, Time.deltaTime * gunPower.GetCurrentGunPower() * 0.1f);
 
-            gunPowerWeapon.transform.Find("Weapon 1").localScale = Vector3.one * gunPowerScale;
-            gunPowerWeapon.transform.Find("Weapon 2").localScale = Vector3.one * gunPowerScale;
+            gunPowerWeapon.transform.Find("WeaponCharge1").localScale = Vector3.one * gunPowerScale;
+            gunPowerWeapon.transform.Find("WeaponCharge2").localScale = Vector3.one * gunPowerScale;
 
             weapon = new Weapon("Player weapon", weaponDamage, 50);
             attackTime = 0.1f;

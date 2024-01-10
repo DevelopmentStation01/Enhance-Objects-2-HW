@@ -5,7 +5,7 @@ using System;
 
 public class Enemy : PlayableObject
 {
-    private string name;
+    //private string name;
     [SerializeField] protected float speed;
     protected Transform target;
 
