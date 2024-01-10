@@ -38,5 +38,5 @@ public class PlayerInput : MonoBehaviour
     {
         player.Move(new Vector2(horizontal, vertical), loookTarget);
     }
-    //should be added to PLayer Object
+    //should be added to Player Object
 }

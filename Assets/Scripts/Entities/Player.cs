@@ -6,7 +6,7 @@ using System;
 //this is instance CLASS (because we can create an instance of it), also known as non static class. Static class can not be istantiated, and cannot be used as an object
 public class Player : PlayableObject
 {
-    private string nickname;
+    //private string nickname;
 
     [Header("Player Settings")]
     [SerializeField] private float speed;
@@ -163,7 +163,7 @@ public class Player : PlayableObject
         Destroy(gameObject);
     }
 
-    public override void Move(Vector2 direction, Vector2 target)
+    /*public override void Move(Vector2 direction, Vector2 target)
     {
         playerRB.velocity = direction * speed * Time.deltaTime;
 
@@ -174,6 +174,49 @@ public class Player : PlayableObject
 
         float angle = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
+    }*/
+
+    //  "Speed" parameter was chabged from 250 to 7
+    public override void Move(Vector2 direction, Vector2 target)
+    {
+        Vector2 cameraBounds = GetCameraBounds();
+
+        // Calculate the desired position based on the player's input and speed
+        Vector3 newPosition = transform.position + new Vector3(direction.x, direction.y, 0) * speed * Time.deltaTime;
+
+        // Restrict player's movement within camera view
+        newPosition.x = Mathf.Clamp(newPosition.x, -cameraBounds.x, cameraBounds.x);
+        newPosition.y = Mathf.Clamp(newPosition.y, -cameraBounds.y, cameraBounds.y);
+
+        // Apply the constrained position
+        playerRB.MovePosition(newPosition);
+
+        // Convert main camera to 2D view - convert from world view to screen view
+        var playerScreenPos = cam.WorldToScreenPoint(transform.position);
+        target.x -= playerScreenPos.x;
+        target.y -= playerScreenPos.y;
+
+        float angle = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
+
+    // Check camera bounds to prevent the player from moving beyond the borders of the main camera
+    public Vector2 GetCameraBounds()
+    {
+        Vector2 cameraBounds = Vector2.zero;
+
+        if (cam != null)
+        {
+            // Get the extents of the camera's viewport in world coordinates
+            float camHeight = cam.orthographicSize;
+            float camWidth = camHeight * cam.aspect;
+
+            // Calculate boundaries considering the camera's position
+            cameraBounds.x = camWidth;
+            cameraBounds.y = camHeight;
+        }
+
+        return cameraBounds;
     }
 
     public override void Attack(float interval) { }

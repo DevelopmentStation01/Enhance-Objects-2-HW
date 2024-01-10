@@ -389,7 +389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a4598a9eccab4f46bbdf53fb2392f30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 250
+  speed: 7
   cam: {fileID: 0}
   bulletPrefab: {fileID: 6416751770342582216, guid: 9e736c58bb1e6470584fab28b8095a33, type: 3}
   burstBulletPrefab: {fileID: 6416751770342582216, guid: 57145b242af364070a2b76d89b9246f0, type: 3}
