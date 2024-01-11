@@ -8,9 +8,18 @@ public class MeleeEnemy : Enemy
     [SerializeField] protected float attackTime;
     [SerializeField] protected float weaponDamage = 1;
     [SerializeField] protected float bulletSpeed = 0;
+    [SerializeField] protected Transform[] bulletSpawnPoints;
 
     protected float timer = 0;
     private float setSpeed = 0;
+
+    // Constructor modified to accept bulletSpawnPoints parameter
+    public MeleeEnemy(float _attackRange, float _attackTime, Transform[] _bulletSpawnPoints)
+    {
+        attackRange = _attackRange;
+        attackTime = _attackTime;
+        bulletSpawnPoints = _bulletSpawnPoints;
+    }
 
     /*public void SetMeleeEnemy(float _attackRange, float _attackTime)
     {
@@ -19,13 +28,15 @@ public class MeleeEnemy : Enemy
     }*/
 
     // Start is called before the first frame update
+
+
     protected override void Start()
     {
         base.Start();
         health = new Health(1, 0, 1);
         setSpeed = speed;
 
-        Weapon enemyWeapon = new Weapon("Melee", weaponDamage, bulletSpeed);
+        Weapon enemyWeapon = new Weapon("Melee", weaponDamage, bulletSpeed, bulletSpawnPoints);
         weapon = enemyWeapon;
     }
 

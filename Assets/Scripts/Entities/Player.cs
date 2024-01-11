@@ -25,6 +25,7 @@ public class Player : PlayableObject
     [SerializeField] private int bulletsInBurts = 20;
     [SerializeField] private float burstInterval = 0.1f; // Time between each bullet in a burst
     [SerializeField] private float burstDuration = 3; // Time of GunPower pickup duaration
+    [SerializeField] private Transform[] bulletSpawnPoints; // attach bullet spawnpoint of the player to the array
     
     public Action OnDeath;
     private Rigidbody2D playerRB;
@@ -49,7 +50,7 @@ public class Player : PlayableObject
         burstSize = bulletsInBurts;
         attackTimeReset = attackTime;
 
-        weapon = new Weapon("Player weapon", weaponDamage, bulletSpeed);
+        weapon = new Weapon("Player weapon", weaponDamage, bulletSpeed,bulletSpawnPoints);
         health = new Health(100, 0.5f, 100);
         gunPower = new GunPower(burstDuration, 0);
         nuke = new Nuke(0);
@@ -108,7 +109,7 @@ public class Player : PlayableObject
             gunPowerWeapon.transform.Find("Style4JetEngine2_1").localScale = Vector3.one * gunPowerScale;
             gunPowerWeapon.transform.Find("Style4JetEngine2_2").localScale = Vector3.one * gunPowerScale;
 
-            weapon = new Weapon("Player weapon", weaponDamage, 50);
+            weapon = new Weapon("Player weapon", weaponDamage, 50, bulletSpawnPoints);
             attackTime = 0.1f;
         }  
         else
@@ -116,7 +117,7 @@ public class Player : PlayableObject
             gunPowerScale = 0.3f; // Visual reset of GunPower load
             
             gunPowerWeapon.SetActive(false);
-            weapon = new Weapon("Player weapon", weaponDamage, bulletSpeed);    
+            weapon = new Weapon("Player weapon", weaponDamage, bulletSpeed, bulletSpawnPoints);    
             attackTime = attackTimeReset;
             bulletPrefab = bullet; 
         }

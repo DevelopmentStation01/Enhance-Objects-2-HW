@@ -5,6 +5,11 @@ public class ShooterEnemy : MachineGunEnemy
     [SerializeField] private LineRenderer lineRenderer; // Assign in the Inspector the LineRenderer component
     [SerializeField] private Transform lineSpawnPoint;
 
+    // Constructor modified to pass bulletSpawnPoints to the base class (MeleeEnemy)
+    public ShooterEnemy(float _attackRange, float _attackTime, Transform[] _bulletSpawnPoints)
+        : base(_attackRange, _attackTime, _bulletSpawnPoints)
+    {}
+
 
     protected override void Start()
     {

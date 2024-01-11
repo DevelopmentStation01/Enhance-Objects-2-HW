@@ -108,6 +108,15 @@ public class UIManager : MonoBehaviour
 
     public void GameOver()
     {
+        txtScore.text = "0";
+        textPower.text = "0";
+        powerSlider.value = 0f;
+        
+        foreach (Transform nukeImg in nukesBar.transform)
+        {
+            Destroy(nukeImg.gameObject);
+        }
+
         lblTitle.SetActive(false);
         lblGameOver.SetActive(true);
         headerGanvas.SetActive(false);

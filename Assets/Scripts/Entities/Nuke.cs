@@ -37,11 +37,11 @@ public class Nuke
 
     private void DestroyAllEntitiesExceptPlayer()
     {
-        GameObject[] entities = GameObject.FindGameObjectsWithTag("Enemy");
+        Enemy[] entities = GameObject.FindObjectsOfType<Enemy>();
 
-        foreach (GameObject entity in entities)
+        foreach (Enemy entity in entities)
         {
-            MonoBehaviour.Destroy(entity);
+            entity.Die();
         }
     }
 }
