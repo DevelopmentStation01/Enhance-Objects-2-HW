@@ -14,6 +14,8 @@ public class Player : PlayableObject
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private Bullet burstBulletPrefab;
     [SerializeField] private GameObject gunPowerWeapon;
+    [SerializeField] private GameObject deathEffect;
+
 
 
     [Header("Weapon Settings")]
@@ -38,6 +40,8 @@ public class Player : PlayableObject
 
     private void Awake()
     {
+        deathEffect.SetActive(false);
+
         playerRB = GetComponent<Rigidbody2D>();
         bullet = bulletPrefab;
 
@@ -97,12 +101,12 @@ public class Player : PlayableObject
             
             // Visual scaling of GunPower load
             if (gunPower.GetCurrentGunPower() > burstDuration - 1)
-                gunPowerScale = 0.3f; 
+                gunPowerScale = 0.03f; 
             else
                 gunPowerScale = Mathf.Lerp(gunPowerScale, 0f, Time.deltaTime * gunPower.GetCurrentGunPower() * 0.1f);
 
-            gunPowerWeapon.transform.Find("WeaponCharge1").localScale = Vector3.one * gunPowerScale;
-            gunPowerWeapon.transform.Find("WeaponCharge2").localScale = Vector3.one * gunPowerScale;
+            gunPowerWeapon.transform.Find("Style4JetEngine2_1").localScale = Vector3.one * gunPowerScale;
+            gunPowerWeapon.transform.Find("Style4JetEngine2_2").localScale = Vector3.one * gunPowerScale;
 
             weapon = new Weapon("Player weapon", weaponDamage, 50);
             attackTime = 0.1f;
@@ -158,6 +162,15 @@ public class Player : PlayableObject
 
     public override void Die()
     {
+        StartCoroutine(RunDeathEffect());
+    }
+
+    IEnumerator RunDeathEffect()
+    {
+        deathEffect.SetActive(true);
+
+        yield return new WaitForSeconds(0.2f);
+
         Debug.Log($"Player died!");
         OnDeath?.Invoke();
         Destroy(gameObject);
@@ -176,7 +189,7 @@ public class Player : PlayableObject
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }*/
 
-    //  "Speed" parameter was chabged from 250 to 7
+    //  "Speed" parameter was chabged from 250 to 2.5
     public override void Move(Vector2 direction, Vector2 target)
     {
         Vector2 cameraBounds = GetCameraBounds();
@@ -196,8 +209,15 @@ public class Player : PlayableObject
         target.x -= playerScreenPos.x;
         target.y -= playerScreenPos.y;
 
-        float angle = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+        // Calculate the target angle
+        float targetAngle = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
+
+        // Smoothly rotate towards the target angle
+        float smoothRotationFactor = 5f; // Adjust this value to control the smoothing
+        float smoothedAngle = Mathf.LerpAngle(transform.eulerAngles.z, targetAngle, smoothRotationFactor * Time.deltaTime);
+
+        // Apply the smoothed rotation
+        transform.rotation = Quaternion.Euler(0, 0, smoothedAngle);
     }
 
     // Check camera bounds to prevent the player from moving beyond the borders of the main camera

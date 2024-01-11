@@ -2,24 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     [Header("Gameplay")]
+    [SerializeField] private GameObject headerGanvas;
     [SerializeField] private TMP_Text txtHealth;
+    [SerializeField] private TMP_Text textPower;
     [SerializeField] private TMP_Text txtScore;
     [SerializeField] private TMP_Text txtHighScore;
     [SerializeField] private TMP_Text txtNuks;
     [SerializeField] private GameObject nukeImg;
     [SerializeField] private Transform nukesBar;
+     [SerializeField] private Slider lifeSlider;
+    [SerializeField] private Slider powerSlider;
 
     [Header("Menu")]
     [SerializeField] private GameObject menuGanvas;
+    [SerializeField] private GameObject lblTitle;
     [SerializeField] private GameObject lblGameOver;
-    [SerializeField] private TMP_Text txtMenuHighScore;
-
-    [Header("TEST")]
-    public TMP_Text textTest;
+    [SerializeField] private TMP_Text txtMenuHighScore;    
 
     private Player player;
     private ScoreManager scoreManager;
@@ -28,6 +31,15 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        lblTitle.SetActive(true);
+        lblGameOver.SetActive(false);
+        headerGanvas.SetActive(false);
+        menuGanvas.SetActive(true);
+
+        // Setting max values for the sliders
+        lifeSlider.maxValue = 100f;
+        powerSlider.maxValue = 5f;
+
         Debug.Log("Running start");
 
         //scoreManager = GameManager.GetInstance().scoreManager;
@@ -38,7 +50,31 @@ public class UIManager : MonoBehaviour
 
     public void UpdateHealth(float currentHealth)
     {
-        txtHealth.SetText(currentHealth.ToString());
+        float roundedHealthValue = (float)System.Math.Round(currentHealth, 0); // Round health value
+        txtHealth.SetText(roundedHealthValue.ToString());
+
+        lifeSlider.value = roundedHealthValue; // Showing current health
+    }
+
+    public void UpdateGunPower(float currentGunPower)
+    {
+        float roundedPowerValue = (float)System.Math.Round(currentGunPower, 1); // Round gun power value
+        textPower.SetText(roundedPowerValue.ToString());
+
+        powerSlider.value = roundedPowerValue; // Showing current gun power
+    }
+
+    public void UpdateScore()
+    {
+        txtScore.SetText(GameManager.GetInstance().scoreManager.GetScore().ToString());
+    }
+
+    public void UpdateHighScore()
+    {
+        Debug.Log("Running update");
+        
+        txtHighScore.SetText(GameManager.GetInstance().scoreManager.GetHighScore().ToString());
+        txtMenuHighScore.SetText($"High Score: {GameManager.GetInstance().scoreManager.GetHighScore()}");
     }
 
     public void UpdateNuke(int nukes)
@@ -58,24 +94,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void UpdateGunPower(float currentGunPower)
-    {
-        textTest.SetText(currentGunPower.ToString());
-    }
-
-    public void UpdateScore()
-    {
-        txtScore.SetText(GameManager.GetInstance().scoreManager.GetScore().ToString());
-    }
-
-    public void UpdateHighScore()
-    {
-        Debug.Log("Running update");
-        
-        txtHighScore.SetText(GameManager.GetInstance().scoreManager.GetHighScore().ToString());
-        txtMenuHighScore.SetText($"High Score: {GameManager.GetInstance().scoreManager.GetHighScore()}");
-    }
-
     public void GameStarted()
     {
         player = GameManager.GetInstance().GetPlayer();
@@ -85,11 +103,14 @@ public class UIManager : MonoBehaviour
         player.gunPower.OnGunPowerUpdate += UpdateGunPower;
 
         menuGanvas.SetActive(false);
+        headerGanvas.SetActive(true);
     }
 
     public void GameOver()
     {
+        lblTitle.SetActive(false);
         lblGameOver.SetActive(true);
+        headerGanvas.SetActive(false);
         menuGanvas.SetActive(true);
     }
 }

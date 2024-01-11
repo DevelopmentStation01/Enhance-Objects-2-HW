@@ -43,5 +43,9 @@ public class ShooterEnemy : MachineGunEnemy
                 }
             }
         }
+        else
+        {
+            lineRenderer.gameObject.SetActive(false);
+        }
     }
 }

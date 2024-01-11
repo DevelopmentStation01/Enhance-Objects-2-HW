@@ -7,6 +7,8 @@ public class Enemy : PlayableObject
 {
     //private string name;
     [SerializeField] protected float speed;
+    [SerializeField] private  GameObject deathEffect;
+
     protected Transform target;
 
     private EnemyType enemyType;
@@ -23,6 +25,8 @@ public class Enemy : PlayableObject
     // to fllow player's game object
     protected virtual void Start()
     {
+        deathEffect.SetActive(false);
+
         try 
         {
             target = GameObject.FindWithTag("Player").transform;
@@ -75,6 +79,15 @@ public class Enemy : PlayableObject
 
     public override void Die()
     {
+        StartCoroutine(RunDeathEffect());
+    }
+
+    IEnumerator RunDeathEffect()
+    {
+        deathEffect.SetActive(true);
+
+        yield return new WaitForSeconds(0.2f);
+
         Debug.Log($"Enemy died");
         GameManager.GetInstance().NotifyDeath(this);
         
