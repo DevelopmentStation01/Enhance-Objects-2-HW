@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Enhance-Objects-2-HW.sln"
+    "dotnet.defaultSolution": "Enhance-Objects-2-HW.sln",
+    "FSharp.suggestGitignore": false
 }
