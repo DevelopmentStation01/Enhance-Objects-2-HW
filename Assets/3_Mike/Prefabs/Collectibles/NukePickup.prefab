@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9db12986b9ee84b0081b3469ccf8075b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onPickClip: {fileID: 8300000, guid: 96eb22f4e1dea144ebb4f8912c8d13ee, type: 3}
 --- !u!58 &6841545440501602117
 CircleCollider2D:
   m_ObjectHideFlags: 0

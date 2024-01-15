@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1545cb79e4a484c98b7530e009fdb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onPickClip: {fileID: 8300000, guid: 46f26a8e4ffef5f409c7000d58ebd10d, type: 3}
 --- !u!1 &3098918166502786094
 GameObject:
   m_ObjectHideFlags: 0

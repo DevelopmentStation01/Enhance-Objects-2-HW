@@ -28,6 +28,7 @@ public class MachineGunEnemy : MeleeEnemy
             if (timer >= interval)
             {
                 Shoot();
+                SoundManager.soundManager.PlaySound(attackClip, transform, 0.35f);
                 timer = 0f;
             }
         }

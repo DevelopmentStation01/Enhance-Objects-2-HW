@@ -90,6 +90,7 @@ MonoBehaviour:
   bulletSpawnPoints:
   - {fileID: 5655149519283825820}
   - {fileID: 7202288654492276625}
+  attackClip: {fileID: 8300000, guid: 00df24fee6732e34a93121551f7606e0, type: 3}
   accuracy: 10
   bulletPrefab: {fileID: 6416751770342582216, guid: 299e6f7ccf9884eb38478862f1ea0095, type: 3}
 --- !u!50 &6646458474529420013

@@ -219,6 +219,7 @@ GameObject:
   - component: {fileID: 102495649}
   - component: {fileID: 102495648}
   - component: {fileID: 102495647}
+  - component: {fileID: 102495650}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -352,6 +353,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102495645}
   m_CullTransparentMesh: 1
+--- !u!114 &102495650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102495645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1351542945}
+          m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+          m_MethodName: PlayButtonEnter
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1351542945}
+          m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+          m_MethodName: PlayButtonExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1351542945}
+          m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+          m_MethodName: PlayButtonClick
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &108153098
 GameObject:
   m_ObjectHideFlags: 0
@@ -4821,6 +4883,109 @@ RectTransform:
   m_AnchoredPosition: {x: 152, y: 178}
   m_SizeDelta: {x: 2652.4421, y: 992.66675}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1351542944
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1351542946}
+  - component: {fileID: 1351542945}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1351542945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351542944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dca3065afea9cb45a6067d5cf31c318, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundFxObj: {fileID: 1715133797137907746, guid: 467e62118b9202f4a93942762a018cbd, type: 3}
+  buttonOnClick: {fileID: 8300000, guid: 4397a8314aa3e904198e103bac26be2a, type: 3}
+  buttonOnEnter: {fileID: 8300000, guid: ea7ab921db689c84bb9df6d701fa9754, type: 3}
+  buttonOnExit: {fileID: 8300000, guid: ea7ab921db689c84bb9df6d701fa9754, type: 3}
+  explosionFx:
+  - {fileID: 8300000, guid: 054d5d586e81f7c45997f7f081e2276d, type: 3}
+  - {fileID: 8300000, guid: 4facf0c073b5fed40b6a75e9bd3a04c7, type: 3}
+  - {fileID: 8300000, guid: 591645aa23ed267488c17565d212c365, type: 3}
+--- !u!4 &1351542946
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351542944}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1367769601
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1367769603}
+  - component: {fileID: 1367769602}
+  m_Layer: 0
+  m_Name: MusicManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1367769602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367769601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b581729a03d13da498b2e9409099451c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicFxObj: {fileID: 6819597663284653968, guid: 891a1da7a5fc55a4ea0c9355e50018b2, type: 3}
+  menuSong: {fileID: 8300000, guid: c5fbb4a922e75294fa72cd8ca5d9a526, type: 3}
+  gameplaySongs:
+  - {fileID: 8300000, guid: a64850ba8ada66644be1198bb3d2376e, type: 3}
+  - {fileID: 8300000, guid: 4e2fdb608e9514a4f92a6bb76f704f91, type: 3}
+  - {fileID: 8300000, guid: 857e58c6b5372ba409e66cced40abb68, type: 3}
+  musicVolume: 0.5
+--- !u!4 &1367769603
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367769601}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1372015045
 GameObject:
   m_ObjectHideFlags: 0
@@ -5052,6 +5217,7 @@ MonoBehaviour:
   nukesBar: {fileID: 108153099}
   lifeSlider: {fileID: 2098267130}
   powerSlider: {fileID: 990927831}
+  nukeClip: {fileID: 8300000, guid: 9b57849608c2cb04f8ec9b89d206ff89, type: 3}
   menuGanvas: {fileID: 718786891}
   lblTitle: {fileID: 1981044118}
   lblGameOver: {fileID: 671996235}
@@ -8493,3 +8659,5 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 547713106}
   - {fileID: 1207456211}
+  - {fileID: 1351542946}
+  - {fileID: 1367769603}
