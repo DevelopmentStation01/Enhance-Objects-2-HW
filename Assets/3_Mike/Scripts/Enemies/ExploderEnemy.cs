@@ -34,6 +34,8 @@ public class ExploderEnemy : MeleeEnemy
                     damageable.GetDamage(weaponDamage);
             }
         }
+        //Play Explosion Sound
+        SoundManager.soundManager.PlaySound(attackClip, transform, 0.35f);
 
         // Destroy the exploder enemy after exploding
         Destroy(gameObject); 

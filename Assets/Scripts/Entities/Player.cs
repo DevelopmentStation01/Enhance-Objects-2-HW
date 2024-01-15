@@ -29,9 +29,9 @@ public class Player : PlayableObject
 
 
     [Header("Sound Effects")]
-    [SerializeField] private AudioClip attackClip; //Shooting Sound Effect
+    [SerializeField] private AudioClip attackClip; 
     [SerializeField] private AudioClip moveClip;
-    private AudioSource movementFx;
+    private AudioSource movementFx; //Player movement audiosource
 
     public Action OnDeath;
     private Rigidbody2D playerRB;
@@ -62,7 +62,7 @@ public class Player : PlayableObject
         nuke = new Nuke(0);
 
         cam = Camera.main; // Assigning main camera automaticly if it is removed from prefab
-        movementFx = SoundManager.soundManager.StartLoopedSound(moveClip, 0.05f);
+        movementFx = SoundManager.soundManager.StartLoopedSound(moveClip, 0.05f); // Assign moveFx to audiosource Object
     }
 
     private void Update()
@@ -163,7 +163,7 @@ public class Player : PlayableObject
         {
             Debug.Log("Player shooting a bullet!");
             weapon.Shoot(bulletPrefab, this, "Enemy");
-            SoundManager.soundManager.PlaySound(attackClip, transform, 0.4f); //Play shoot sound
+            SoundManager.soundManager.PlaySound(attackClip, transform, 0.4f); //Play shoot soundFx
 
             // Reset the attack timer after shooting
             attackTimer = 0f;
@@ -178,7 +178,7 @@ public class Player : PlayableObject
     IEnumerator RunDeathEffect()
     {
         deathEffect.SetActive(true);
-        SoundManager.soundManager.PlayerDeath(movementFx);
+        SoundManager.soundManager.PlayerDeath(movementFx); //Call death soundFx changes
         yield return new WaitForSeconds(0.2f);
 
         Debug.Log($"Player died!");

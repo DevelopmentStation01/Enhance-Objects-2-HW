@@ -73,6 +73,7 @@ public class MeleeEnemy : Enemy
         {
             timer = 0;
             target.GetComponent<IDamageable>().GetDamage(weapon.GetDamage());
+            //Play Melee Attack Sound
             SoundManager.soundManager.PlaySound(attackClip, transform, 0.35f);
         }
     }

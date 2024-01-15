@@ -7,7 +7,7 @@ public class Enemy : PlayableObject
 {
     //private string name;
     [SerializeField] protected float speed;
-    [SerializeField] private  GameObject deathEffect;
+    [SerializeField] private  GameObject deathEffect; 
 
     protected Transform target;
 
@@ -85,7 +85,7 @@ public class Enemy : PlayableObject
     IEnumerator RunDeathEffect()
     {
         deathEffect.SetActive(true);
-        SoundManager.soundManager.PlayRandomExplosion();
+        SoundManager.soundManager.PlayRandomExplosion(); // Plays random death explosion soundFx
         yield return new WaitForSeconds(0.2f);
 
         Debug.Log($"Enemy died");
