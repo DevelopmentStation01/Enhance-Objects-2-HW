@@ -96,6 +96,9 @@ MonoBehaviour:
   bulletSpawnPoints:
   - {fileID: 6487312983044421950}
   - {fileID: 5673023965879417812}
+  attackClip: {fileID: 8300000, guid: c3c988574c4c15e4283fb6644c1a0c73, type: 3}
+  nukeClip: {fileID: 8300000, guid: 9b57849608c2cb04f8ec9b89d206ff89, type: 3}
+  moveClip: {fileID: 8300000, guid: 62371a80f193ad1428a329486d329e63, type: 3}
 --- !u!114 &4768038955327843442
 MonoBehaviour:
   m_ObjectHideFlags: 0

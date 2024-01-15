@@ -85,7 +85,7 @@ public class Enemy : PlayableObject
     IEnumerator RunDeathEffect()
     {
         deathEffect.SetActive(true);
-
+        SoundManager.soundManager.PlayRandomExplosion();
         yield return new WaitForSeconds(0.2f);
 
         Debug.Log($"Enemy died");

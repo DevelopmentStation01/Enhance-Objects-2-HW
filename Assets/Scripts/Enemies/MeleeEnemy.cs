@@ -10,6 +10,9 @@ public class MeleeEnemy : Enemy
     [SerializeField] protected float bulletSpeed = 0;
     [SerializeField] protected Transform[] bulletSpawnPoints;
 
+    [SerializeField] protected AudioClip attackClip;
+
+
     protected float timer = 0;
     private float setSpeed = 0;
 
@@ -70,6 +73,7 @@ public class MeleeEnemy : Enemy
         {
             timer = 0;
             target.GetComponent<IDamageable>().GetDamage(weapon.GetDamage());
+            SoundManager.soundManager.PlaySound(attackClip, transform, 0.35f);
         }
     }
 }

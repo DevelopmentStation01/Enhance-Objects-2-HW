@@ -26,7 +26,14 @@ public class Player : PlayableObject
     [SerializeField] private float burstInterval = 0.1f; // Time between each bullet in a burst
     [SerializeField] private float burstDuration = 3; // Time of GunPower pickup duaration
     [SerializeField] private Transform[] bulletSpawnPoints; // attach bullet spawnpoint of the player to the array
-    
+
+
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip attackClip; //Shooting Sound Effect
+    [SerializeField] private AudioClip nukeClip;
+    [SerializeField] private AudioClip moveClip;
+    private AudioSource movementFx;
+
     public Action OnDeath;
     private Rigidbody2D playerRB;
     private  Bullet bullet;
@@ -56,6 +63,7 @@ public class Player : PlayableObject
         nuke = new Nuke(0);
 
         cam = Camera.main; // Assigning main camera automaticly if it is removed from prefab
+        movementFx = SoundManager.soundManager.StartLoopedSound(moveClip, 0.05f);
     }
 
     private void Update()
@@ -65,7 +73,8 @@ public class Player : PlayableObject
         attackTimer += Time.deltaTime;
 
         ShootGunPower();
-        UpdateGunPower();            
+        UpdateGunPower();
+        UpdatePlayerSound();
     }
 
     // Trigger a nuke action
@@ -73,6 +82,7 @@ public class Player : PlayableObject
     {
         Debug.Log($"Player using nuke");
         nuke.UseNuke();
+        SoundManager.soundManager.PlaySound(nukeClip, transform, 0.6f);
     }
 
     // Check if gun power is active, initiate gun power firing or regular shooting based on timer
@@ -155,6 +165,7 @@ public class Player : PlayableObject
         {
             Debug.Log("Player shooting a bullet!");
             weapon.Shoot(bulletPrefab, this, "Enemy");
+            SoundManager.soundManager.PlaySound(attackClip, transform, 0.4f); //Play shoot sound
 
             // Reset the attack timer after shooting
             attackTimer = 0f;
@@ -169,7 +180,7 @@ public class Player : PlayableObject
     IEnumerator RunDeathEffect()
     {
         deathEffect.SetActive(true);
-
+        SoundManager.soundManager.PlayerDeath(movementFx);
         yield return new WaitForSeconds(0.2f);
 
         Debug.Log($"Player died!");
@@ -249,5 +260,21 @@ public class Player : PlayableObject
 
         if (health.GetHealth() <= 0)
             Die();
+    }
+
+    public void UpdatePlayerSound()
+    {
+        //Increase rocket sound effect volume when powerup is on
+        if (movementFx != null)
+        {
+            if (gunPower.GetIsGunPower())
+            {
+                movementFx.volume = 0.2f;
+            }
+            else
+            {
+                movementFx.volume = 0.1f;
+            }
+        }
     }
 }

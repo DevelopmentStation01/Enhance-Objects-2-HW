@@ -187,6 +187,7 @@ MonoBehaviour:
   bulletSpeed: 0
   bulletSpawnPoints:
   - {fileID: 3379889794330441463}
+  attackClip: {fileID: 8300000, guid: 67de2278c6efe3a4fb913b5b8e74df17, type: 3}
   explosionRadius: 5
 --- !u!50 &3927245113757106834
 Rigidbody2D:
