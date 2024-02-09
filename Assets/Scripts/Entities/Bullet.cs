@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float damage;
+
+    // Setting timer to track bullet's life
+    private float timeLimit = 2f;
+    private float timer;
 
     private string targetTag;
 
@@ -17,17 +20,35 @@ public class Bullet : MonoBehaviour
         this.targetTag = _targetTag;
     }
 
+
+    private void Start()
+    {
+        timer = 0f; // Reset the timer when the bullet is created
+    }
+
     private void Update()
     {
         Move();
+        DestroyBullet();
     }
 
-    void Move()
+    private void Move()
     {
         transform.Translate(Vector2.right * speed * Time.deltaTime);
     }
 
-    void Damage(IDamageable damageable)
+    // Adding this method to destroy instantiated bullets by time, to decrease the system overloading
+    private void DestroyBullet()
+    {
+        // Increment the timer
+        timer += Time.deltaTime;
+
+        // Check if the time limit is reached
+        if (timer >= timeLimit)
+            Destroy(gameObject); // Destroy the bullet after the time limit
+    }
+
+    private void Damage(IDamageable damageable)
     {
         if (damageable != null)
         {
