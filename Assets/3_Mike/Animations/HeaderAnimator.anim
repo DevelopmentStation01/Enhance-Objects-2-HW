@@ -23,7 +23,11 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
+<<<<<<< HEAD
         value: 256
+=======
+        value: 196
+>>>>>>> origin/tomo-dev
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -32,7 +36,11 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
+<<<<<<< HEAD
         value: -89
+=======
+        value: -100
+>>>>>>> origin/tomo-dev
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -41,7 +49,11 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.6666666
+<<<<<<< HEAD
         value: -44
+=======
+        value: -47.716675
+>>>>>>> origin/tomo-dev
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -245,7 +257,11 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
+<<<<<<< HEAD
         value: 256
+=======
+        value: 196
+>>>>>>> origin/tomo-dev
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -254,7 +270,11 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
+<<<<<<< HEAD
         value: -89
+=======
+        value: -100
+>>>>>>> origin/tomo-dev
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -263,7 +283,11 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.6666666
+<<<<<<< HEAD
         value: -44
+=======
+        value: -47.716675
+>>>>>>> origin/tomo-dev
         inSlope: 0
         outSlope: 0
         tangentMode: 136
