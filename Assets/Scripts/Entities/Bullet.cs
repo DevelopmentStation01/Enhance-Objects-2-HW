@@ -10,6 +10,10 @@ public class Bullet : MonoBehaviour
 
     private string targetTag;
 
+    // Adding time limit in seconds to control bullet's life to decrease memory load
+    private float timeLimit = 2f;
+    private float timer;
+
     public void SetBullet(float _damage, string _targetTag, float _speed = 10)
     {
         this.damage = _damage;
@@ -17,17 +21,23 @@ public class Bullet : MonoBehaviour
         this.targetTag = _targetTag;
     }
 
+    private void Start()
+    {
+        timer = 0f; // Reset the timer when the bullet is created
+    }
+
     private void Update()
     {
         Move();
+        DestroyBullet();
     }
 
-    void Move()
+    private void Move()
     {
         transform.Translate(Vector2.right * speed * Time.deltaTime);
     }
 
-    void Damage(IDamageable damageable)
+    private void Damage(IDamageable damageable)
     {
         if (damageable != null)
         {
@@ -48,5 +58,18 @@ public class Bullet : MonoBehaviour
 
         IDamageable damageable = collision.GetComponent<IDamageable>();
         Damage(damageable);
+    }
+
+    private void DestroyBullet()
+    {
+        // Increment the timer
+        timer += Time.deltaTime;
+
+        // Check if the time limit is reached
+        if (timer >= timeLimit)
+        {
+            // Destroy the bullet after the time limit
+            Destroy(gameObject);
+        }
     }
 }
