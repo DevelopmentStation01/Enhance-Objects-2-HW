@@ -25,7 +25,14 @@ public class Player : PlayableObject
     [SerializeField] private int bulletsInBurts = 20;
     [SerializeField] private float burstInterval = 0.1f; // Time between each bullet in a burst
     [SerializeField] private float burstDuration = 3; // Time of GunPower pickup duaration
-    
+    [SerializeField] private Transform[] bulletSpawnPoints; // attach bullet spawnpoint of the player to the array
+
+
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip attackClip; 
+    [SerializeField] private AudioClip moveClip;
+    private AudioSource movementFx; //Player movement audiosource
+
     public Action OnDeath;
     private Rigidbody2D playerRB;
     private  Bullet bullet;
@@ -49,12 +56,13 @@ public class Player : PlayableObject
         burstSize = bulletsInBurts;
         attackTimeReset = attackTime;
 
-        weapon = new Weapon("Player weapon", weaponDamage, bulletSpeed);
+        weapon = new Weapon("Player weapon", weaponDamage, bulletSpeed,bulletSpawnPoints);
         health = new Health(100, 0.5f, 100);
         gunPower = new GunPower(burstDuration, 0);
         nuke = new Nuke(0);
 
         cam = Camera.main; // Assigning main camera automaticly if it is removed from prefab
+        movementFx = SoundManager.soundManager.StartLoopedSound(moveClip, 0.05f); // Assign moveFx to audiosource Object
     }
 
     private void Update()
@@ -64,7 +72,8 @@ public class Player : PlayableObject
         attackTimer += Time.deltaTime;
 
         ShootGunPower();
-        UpdateGunPower();            
+        UpdateGunPower();
+        UpdatePlayerSound();
     }
 
     // Trigger a nuke action
@@ -108,7 +117,7 @@ public class Player : PlayableObject
             gunPowerWeapon.transform.Find("Style4JetEngine2_1").localScale = Vector3.one * gunPowerScale;
             gunPowerWeapon.transform.Find("Style4JetEngine2_2").localScale = Vector3.one * gunPowerScale;
 
-            weapon = new Weapon("Player weapon", weaponDamage, 50);
+            weapon = new Weapon("Player weapon", weaponDamage, 50, bulletSpawnPoints);
             attackTime = 0.1f;
         }  
         else
@@ -116,7 +125,7 @@ public class Player : PlayableObject
             gunPowerScale = 0.3f; // Visual reset of GunPower load
             
             gunPowerWeapon.SetActive(false);
-            weapon = new Weapon("Player weapon", weaponDamage, bulletSpeed);    
+            weapon = new Weapon("Player weapon", weaponDamage, bulletSpeed, bulletSpawnPoints);    
             attackTime = attackTimeReset;
             bulletPrefab = bullet; 
         }
@@ -154,6 +163,7 @@ public class Player : PlayableObject
         {
             Debug.Log("Player shooting a bullet!");
             weapon.Shoot(bulletPrefab, this, "Enemy");
+            SoundManager.soundManager.PlaySound(attackClip, transform, 0.4f); //Play shoot soundFx
 
             // Reset the attack timer after shooting
             attackTimer = 0f;
@@ -168,7 +178,7 @@ public class Player : PlayableObject
     IEnumerator RunDeathEffect()
     {
         deathEffect.SetActive(true);
-
+        SoundManager.soundManager.PlayerDeath(movementFx); //Call death soundFx changes
         yield return new WaitForSeconds(0.2f);
 
         Debug.Log($"Player died!");
@@ -248,5 +258,21 @@ public class Player : PlayableObject
 
         if (health.GetHealth() <= 0)
             Die();
+    }
+
+    public void UpdatePlayerSound()
+    {
+        //Increase rocket sound effect volume when powerup is on
+        if (movementFx != null)
+        {
+            if (gunPower.GetIsGunPower())
+            {
+                movementFx.volume = 0.2f;
+            }
+            else
+            {
+                movementFx.volume = 0.1f;
+            }
+        }
     }
 }

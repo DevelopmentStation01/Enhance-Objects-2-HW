@@ -4,6 +4,10 @@ public class ExploderEnemy : MeleeEnemy
 {
     [SerializeField] private float explosionRadius = 3f;
 
+    // Constructor modified to pass bulletSpawnPoints to the base class (MeleeEnemy)
+    public ExploderEnemy(float _attackRange, float _attackTime, Transform[] _bulletSpawnPoints)
+        : base(_attackRange, _attackTime, _bulletSpawnPoints)
+    {}
 
     protected override void Update()
     {
@@ -30,6 +34,8 @@ public class ExploderEnemy : MeleeEnemy
                     damageable.GetDamage(weaponDamage);
             }
         }
+        //Play Explosion Sound
+        SoundManager.soundManager.PlaySound(attackClip, transform, 0.35f);
 
         // Destroy the exploder enemy after exploding
         Destroy(gameObject); 

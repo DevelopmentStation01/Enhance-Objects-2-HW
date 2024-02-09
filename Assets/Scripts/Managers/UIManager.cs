@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Transform nukesBar;
      [SerializeField] private Slider lifeSlider;
     [SerializeField] private Slider powerSlider;
+    [SerializeField] private AudioClip nukeClip;
 
     [Header("Menu")]
     [SerializeField] private GameObject menuGanvas;
@@ -90,7 +91,10 @@ public class UIManager : MonoBehaviour
         else if (nukes < nukesBar.transform.childCount) // Remove extra instances, when nuke was used
         {
             if (nukesBar.transform.childCount > 0)
+            {
                 Destroy(nukesBar.transform.GetChild(0).gameObject);
+                SoundManager.soundManager.PlaySound(nukeClip, transform, 0.6f);
+            }
         }
     }
 
@@ -108,6 +112,15 @@ public class UIManager : MonoBehaviour
 
     public void GameOver()
     {
+        txtScore.text = "0";
+        textPower.text = "0";
+        powerSlider.value = 0f;
+        
+        foreach (Transform nukeImg in nukesBar.transform)
+        {
+            Destroy(nukeImg.gameObject);
+        }
+
         lblTitle.SetActive(false);
         lblGameOver.SetActive(true);
         headerGanvas.SetActive(false);
