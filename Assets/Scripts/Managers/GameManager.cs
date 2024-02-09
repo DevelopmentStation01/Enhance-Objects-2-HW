@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float enemySpawnRate;
     [SerializeField] private GameObject playerPrefab;
 
-
     private GameObject tempEnemy;
     private bool isPlaying = false;
 
@@ -28,6 +27,12 @@ public class GameManager : MonoBehaviour
 
     private static GameManager instance;
     private Player player;
+
+    public float EnemySpawnRate 
+    { 
+        get { return enemySpawnRate; } 
+        set { enemySpawnRate = value; } 
+    }
 
     public static GameManager GetInstance()
     {
